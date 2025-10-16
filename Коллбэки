@@ -1,0 +1,25 @@
+function getPostsSortedByTitleLength(callback) {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "https://jsonplaceholder.typicode.com/posts");
+  xhr.onload = () => {
+    const posts = JSON.parse(xhr.responseText);
+    const sorted = posts.sort((a, b) => b.title.length - a.title.length);
+    callback(sorted);
+  };
+  xhr.onerror = () => console.error("Ошибка запроса /posts");
+  xhr.send();
+}
+
+function getCommentsSortedByAuthorName(callback) {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "https://jsonplaceholder.typicode.com/comments");
+  xhr.onload = () => {
+    const comments = JSON.parse(xhr.responseText);
+    const sorted = comments.sort((a, b) => a.name.localeCompare(b.name));
+    callback(sorted);
+  };
+  xhr.onerror = () => console.error("Ошибка запроса /comments");
+  xhr.send();
+}
+
+
