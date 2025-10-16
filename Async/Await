@@ -1,0 +1,45 @@
+   async function getPostsSortedByTitleLengthAsync() {
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const posts = await res.json();
+    return posts.sort((a, b) => b.title.length - a.title.length);
+  } catch (err) {
+    console.error("Ошибка /posts:", err);
+  }
+}
+
+async function getCommentsSortedByAuthorNameAsync() {
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/comments");
+    const comments = await res.json();
+    return comments.sort((a, b) => a.name.localeCompare(b.name));
+  } catch (err) {
+    console.error("Ошибка /comments:", err);
+  }
+}
+
+async function getFilteredUsersAsync() {
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/users");
+    const users = await res.json();
+    return users.map(user => ({
+      id: user.id,
+      name: user.name,
+      username: user.username,
+      email: user.email,
+      phone: user.phone
+    }));
+  } catch (err) {
+    console.error("Ошибка /users:", err);
+  }
+}
+
+async function getTodosWithFalsyCompletedAsync() {
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+    const todos = await res.json();
+    return todos.filter(todo => !todo.completed);
+  } catch (err) {
+    console.error("Ошибка /todos:", err);
+  }
+}
